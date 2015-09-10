@@ -10,8 +10,14 @@ import Foundation
 
 typealias StringDict = [String:String]
 
-class DataProvider {
-    static let sharedInstance = DataProvider() // Boooo!
+protocol DataProviderType {
+    func getAuthToken(completion: Bool -> Void)
+    func fetchRegisteredUsers(completion: [StringDict] -> Void)
+    func fetchMyProfile(completion: StringDict? -> Void)
+    func fetchFriends(user: String, completion: [StringDict] -> Void)
+}
+
+class DataProvider : DataProviderType {
     var token: String?
     
     func getAuthToken(completion: Bool -> Void) {

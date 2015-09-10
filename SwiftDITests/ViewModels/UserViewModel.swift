@@ -13,8 +13,9 @@ struct UserViewModel {
     var address: AddressViewModel
     
     static func me(completion: UserViewModel? -> Void) {
-        DataProvider.sharedInstance.fetchMyProfile() { userDict in
-            completion(UserViewModel(dictionary: userDict))
+        let dataProvider: DataProviderType = DependencyContainer.resolve()
+        dataProvider.fetchMyProfile() { userDict in
+            completion(userDict.flatMap(UserViewModel.init))
         }
     }
     
