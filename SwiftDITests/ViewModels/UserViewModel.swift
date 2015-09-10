@@ -12,10 +12,10 @@ struct UserViewModel {
     var name: String
     var address: AddressViewModel
     
-    static func me() -> UserViewModel {
-        return UserViewModel(
+    static func me(completion: UserViewModel -> Void) {
+        completion(UserViewModel(
             name: "AliSoftware",
             address: AddressViewModel(city: "Rennes", country: "France")
-        )
+        ))
     }
 }

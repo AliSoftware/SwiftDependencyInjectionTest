@@ -21,17 +21,19 @@ class HomeViewController: UIViewController {
     // MARK: - Actions
     
     @IBAction func usersButtonTapped(sender: UIButton) {
-        let usersVM = UsersListViewModel.registeredUsers()
-        let usersVC = UsersListViewController.instance(viewModel: usersVM)
-        usersVC.title = "Registered Users"
-        self.navigationController?.pushViewController(usersVC, animated: true)
+        UsersListViewModel.registeredUsers() { usersVM in
+            let usersVC = UsersListViewController.instance(viewModel: usersVM)
+            usersVC.title = "Registered Users"
+            self.navigationController?.pushViewController(usersVC, animated: true)
+        }
     }
     
     @IBAction func myProfileButtonTapped(sender: UIButton) {
-        let meVM = UserViewModel.me()
-        let profileVC = UserViewController.instance(viewModel: meVM)
-        profileVC.title = "Me"
-        self.navigationController?.pushViewController(profileVC, animated: true)
+        UserViewModel.me() { meVM in
+            let profileVC = UserViewController.instance(viewModel: meVM)
+            profileVC.title = "Me"
+            self.navigationController?.pushViewController(profileVC, animated: true)
+        }
     }
 }
 
