@@ -12,20 +12,30 @@ typealias StringDict = [String:String]
 
 class DataProvider {
     static let sharedInstance = DataProvider() // Boooo!
+    var token: String?
+    
+    func getAuthToken(completion: Bool -> Void) {
+        token = "FakeToken"
+        completion(true)
+    }
     
     func fetchRegisteredUsers(completion: [StringDict] -> Void) {
+        guard token != nil else { completion([]); return }
         fetchMyProfile { meDict in
-            let allDicts = [
+            var allDicts = [
                 ["name":"John Doe", "city": "New York", "country": "USA"],
                 ["name":"Bob", "city": "New York", "country": "USA"],
                 ["name":"Alice", "city": "Copenhagen", "country": "Denmark"],
-                meDict
             ]
+            if let meDict = meDict {
+                allDicts.append(meDict)
+            }
             completion(allDicts)
         }
     }
     
-    func fetchMyProfile(completion: StringDict -> Void) {
+    func fetchMyProfile(completion: StringDict? -> Void) {
+        guard token != nil else { completion(nil); return }
         let dict = [
             "name": "AliSoftware",
             "city": "Rennes",
@@ -35,6 +45,7 @@ class DataProvider {
     }
     
     func fetchFriends(user: String, completion: [StringDict] -> Void) {
+        guard token != nil else { completion([]); return }
         let nbFriends = user.characters.count
         let friendsDicts = (1...nbFriends).map { idx in
             ["name": "\(user)'s friend #\(idx)","city": "\(user)Ville","country": "FriendsLand"]

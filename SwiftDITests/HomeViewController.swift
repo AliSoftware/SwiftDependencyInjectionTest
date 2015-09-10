@@ -20,6 +20,10 @@ class HomeViewController: UIViewController {
 
     // MARK: - Actions
     
+    @IBAction func requestTokenButtonTapped(sender: UIButton) {
+        DataProvider.sharedInstance.getAuthToken() { _ in }
+    }
+    
     @IBAction func usersButtonTapped(sender: UIButton) {
         UsersListViewModel.registeredUsers() { usersVM in
             let usersVC = UsersListViewController.instance(viewModel: usersVM)
