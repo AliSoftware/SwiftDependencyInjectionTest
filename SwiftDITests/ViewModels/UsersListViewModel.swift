@@ -13,15 +13,16 @@ struct UsersListViewModel {
     
     static func registeredUsers(completion: UsersListViewModel -> Void) {
         DataProvider.sharedInstance.fetchRegisteredUsers() { userDicts in
-            let userVMs = userDicts.map(UserViewModel.init).flatMap({$0})
+            let userVMs = userDicts.flatMap(UserViewModel.init)
             completion(UsersListViewModel(users: userVMs))
         }
     }
     
-    static func friends(userID: Int, completion: UsersListViewModel -> Void) {
-        // TODO: Implement this
-        completion(UsersListViewModel(users: []))
+    static func friends(userName: String, completion: UsersListViewModel -> Void) {
+        DataProvider.sharedInstance.fetchFriends(userName) { userDicts in
+            let userVMs = userDicts.flatMap(UserViewModel.init)
+            completion(UsersListViewModel(users: userVMs))
+        }
     }
-    
 
 }

@@ -54,4 +54,11 @@ class UserViewController : UIViewController {
         self.navigationController?.pushViewController(vc, animated: true)
     }
 
+    @IBAction func showFriends(sender: UIButton) {
+        UsersListViewModel.friends(viewModel.name) { friendsVM in
+            let vc = UsersListViewController.instance(viewModel: friendsVM)
+            vc.title = "\(self.viewModel.name)'s Friends"
+            self.navigationController?.pushViewController(vc, animated: true)
+        }
+    }
 }

@@ -116,6 +116,13 @@
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="maz-UF-7Jh">
+                                <rect key="frame" x="254" y="248" width="93" height="30"/>
+                                <state key="normal" title="Show Friends"/>
+                                <connections>
+                                    <action selector="showFriends:" destination="e8t-oB-dRf" eventType="touchUpInside" id="Gpe-dJ-efZ"/>
+                                </connections>
+                            </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="(Address)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="E9H-nI-F0h">
                                 <rect key="frame" x="263" y="98" width="74" height="20.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -127,8 +134,10 @@
                         <constraints>
                             <constraint firstItem="fQF-CT-8Pf" firstAttribute="centerX" secondItem="DxO-x3-GHA" secondAttribute="centerX" id="8nr-EK-ndl"/>
                             <constraint firstItem="Art-ZE-h59" firstAttribute="centerX" secondItem="DxO-x3-GHA" secondAttribute="centerX" id="G4R-wK-CDe"/>
+                            <constraint firstItem="maz-UF-7Jh" firstAttribute="top" secondItem="Art-ZE-h59" secondAttribute="bottom" constant="50" id="H4m-Vy-lao"/>
                             <constraint firstItem="fQF-CT-8Pf" firstAttribute="top" secondItem="aNi-nB-f5a" secondAttribute="bottom" constant="8" symbolic="YES" id="ITX-lC-4aq"/>
                             <constraint firstItem="Art-ZE-h59" firstAttribute="top" secondItem="E9H-nI-F0h" secondAttribute="bottom" constant="50" id="Mjx-sU-ERd"/>
+                            <constraint firstItem="maz-UF-7Jh" firstAttribute="centerX" secondItem="DxO-x3-GHA" secondAttribute="centerX" id="WxC-3J-k5E"/>
                             <constraint firstItem="E9H-nI-F0h" firstAttribute="centerX" secondItem="DxO-x3-GHA" secondAttribute="centerX" id="a2E-GK-J6q"/>
                             <constraint firstItem="E9H-nI-F0h" firstAttribute="top" secondItem="fQF-CT-8Pf" secondAttribute="bottom" constant="50" id="n1Y-FJ-cw6"/>
                         </constraints>
