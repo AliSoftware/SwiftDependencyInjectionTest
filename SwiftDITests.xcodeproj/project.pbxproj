@@ -13,8 +13,11 @@
 		090E5C651BA20ED900F10EB8 /* AddressCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 090E5C641BA20ED900F10EB8 /* AddressCell.swift */; settings = {ASSET_TAGS = (); }; };
 		090E5C671BA20FC300F10EB8 /* UserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 090E5C661BA20FC300F10EB8 /* UserViewController.swift */; settings = {ASSET_TAGS = (); }; };
 		090E5C691BA20FDE00F10EB8 /* AddressViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 090E5C681BA20FDE00F10EB8 /* AddressViewController.swift */; settings = {ASSET_TAGS = (); }; };
-		090E5C6C1BA2236C00F10EB8 /* DataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 090E5C6B1BA2236C00F10EB8 /* DataProvider.swift */; settings = {ASSET_TAGS = (); }; };
+		090E5C6C1BA2236C00F10EB8 /* DataProviderType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 090E5C6B1BA2236C00F10EB8 /* DataProviderType.swift */; settings = {ASSET_TAGS = (); }; };
 		090E5C6E1BA23A8A00F10EB8 /* DependencyContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 090E5C6D1BA23A8A00F10EB8 /* DependencyContainer.swift */; settings = {ASSET_TAGS = (); }; };
+		090E5C701BA24A3400F10EB8 /* PlistDataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 090E5C6F1BA24A3400F10EB8 /* PlistDataProvider.swift */; settings = {ASSET_TAGS = (); }; };
+		090E5C721BA24A4000F10EB8 /* HardCodedDataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 090E5C711BA24A4000F10EB8 /* HardCodedDataProvider.swift */; settings = {ASSET_TAGS = (); }; };
+		090E5C741BA24B7800F10EB8 /* users.plist in Resources */ = {isa = PBXBuildFile; fileRef = 090E5C731BA24B7800F10EB8 /* users.plist */; settings = {ASSET_TAGS = (); }; };
 		09F97DBF1BA1FD0400981B82 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09F97DBE1BA1FD0400981B82 /* AppDelegate.swift */; };
 		09F97DC11BA1FD0400981B82 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09F97DC01BA1FD0400981B82 /* HomeViewController.swift */; };
 		09F97DC41BA1FD0400981B82 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 09F97DC21BA1FD0400981B82 /* Main.storyboard */; };
@@ -33,8 +36,11 @@
 		090E5C641BA20ED900F10EB8 /* AddressCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddressCell.swift; sourceTree = "<group>"; };
 		090E5C661BA20FC300F10EB8 /* UserViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserViewController.swift; sourceTree = "<group>"; };
 		090E5C681BA20FDE00F10EB8 /* AddressViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddressViewController.swift; sourceTree = "<group>"; };
-		090E5C6B1BA2236C00F10EB8 /* DataProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataProvider.swift; sourceTree = "<group>"; };
+		090E5C6B1BA2236C00F10EB8 /* DataProviderType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataProviderType.swift; sourceTree = "<group>"; };
 		090E5C6D1BA23A8A00F10EB8 /* DependencyContainer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DependencyContainer.swift; sourceTree = "<group>"; };
+		090E5C6F1BA24A3400F10EB8 /* PlistDataProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlistDataProvider.swift; sourceTree = "<group>"; };
+		090E5C711BA24A4000F10EB8 /* HardCodedDataProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HardCodedDataProvider.swift; sourceTree = "<group>"; };
+		090E5C731BA24B7800F10EB8 /* users.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = users.plist; sourceTree = "<group>"; };
 		09F97DBB1BA1FD0400981B82 /* SwiftDITests.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SwiftDITests.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		09F97DBE1BA1FD0400981B82 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		09F97DC01BA1FD0400981B82 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
@@ -80,7 +86,9 @@
 		090E5C6A1BA2234D00F10EB8 /* Provider */ = {
 			isa = PBXGroup;
 			children = (
-				090E5C6B1BA2236C00F10EB8 /* DataProvider.swift */,
+				090E5C6B1BA2236C00F10EB8 /* DataProviderType.swift */,
+				090E5C6F1BA24A3400F10EB8 /* PlistDataProvider.swift */,
+				090E5C711BA24A4000F10EB8 /* HardCodedDataProvider.swift */,
 			);
 			path = Provider;
 			sourceTree = "<group>";
@@ -124,6 +132,7 @@
 				09F97DC51BA1FD0400981B82 /* Assets.xcassets */,
 				09F97DC71BA1FD0400981B82 /* LaunchScreen.storyboard */,
 				09F97DCA1BA1FD0400981B82 /* Info.plist */,
+				090E5C731BA24B7800F10EB8 /* users.plist */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -208,6 +217,7 @@
 				09F97DC91BA1FD0400981B82 /* LaunchScreen.storyboard in Resources */,
 				09F97DC61BA1FD0400981B82 /* Assets.xcassets in Resources */,
 				09F97DC41BA1FD0400981B82 /* Main.storyboard in Resources */,
+				090E5C741BA24B7800F10EB8 /* users.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -221,17 +231,19 @@
 				090E5C6E1BA23A8A00F10EB8 /* DependencyContainer.swift in Sources */,
 				09F97DC11BA1FD0400981B82 /* HomeViewController.swift in Sources */,
 				09F97DD91BA2019600981B82 /* UsersListViewModel.swift in Sources */,
+				090E5C701BA24A3400F10EB8 /* PlistDataProvider.swift in Sources */,
 				09F97DD11BA1FF7E00981B82 /* UserViewModel.swift in Sources */,
 				090E5C691BA20FDE00F10EB8 /* AddressViewController.swift in Sources */,
 				090E5C671BA20FC300F10EB8 /* UserViewController.swift in Sources */,
 				09F97DD61BA2015700981B82 /* UsersListViewController.swift in Sources */,
 				090E5C611BA20BC800F10EB8 /* BaseCell.swift in Sources */,
+				090E5C721BA24A4000F10EB8 /* HardCodedDataProvider.swift in Sources */,
 				090E5C631BA20D5C00F10EB8 /* UserCell.swift in Sources */,
 				090E5C651BA20ED900F10EB8 /* AddressCell.swift in Sources */,
 				09F97DBF1BA1FD0400981B82 /* AppDelegate.swift in Sources */,
 				09F97DD41BA1FFDE00981B82 /* AddressViewModel.swift in Sources */,
 				090E5C5E1BA208A200F10EB8 /* Storyboards.swift in Sources */,
-				090E5C6C1BA2236C00F10EB8 /* DataProvider.swift in Sources */,
+				090E5C6C1BA2236C00F10EB8 /* DataProviderType.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

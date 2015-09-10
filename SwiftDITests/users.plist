@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>token</key>
+	<string>FooBar</string>
+	<key>registeredUsers</key>
+	<array>
+		<dict>
+			<key>name</key>
+			<string>Alice</string>
+			<key>city</key>
+			<string>Washington, DC</string>
+			<key>country</key>
+			<string>USA</string>
+		</dict>
+		<dict>
+			<key>name</key>
+			<string>Dave</string>
+			<key>city</key>
+			<string>London</string>
+			<key>country</key>
+			<string>United Kindgom</string>
+		</dict>
+		<dict>
+			<key>name</key>
+			<string>James</string>
+			<key>city</key>
+			<string>Berlin</string>
+			<key>country</key>
+			<string>Germany</string>
+		</dict>
+	</array>
+	<key>me</key>
+	<dict>
+		<key>name</key>
+		<string>Dick Cionary</string>
+		<key>city</key>
+		<string>Dublin</string>
+		<key>country</key>
+		<string>Ireland</string>
+	</dict>
+</dict>
+</plist>

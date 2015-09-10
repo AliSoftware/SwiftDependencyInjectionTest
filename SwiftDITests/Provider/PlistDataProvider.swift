@@ -1,38 +1,32 @@
 //
-//  DataProvider.swift
+//  PlistDataProvider.swift
 //  SwiftDITests
 //
-//  Created by Olivier Halligon on 10/09/2015.
+//  Created by Olivier Halligon on 11/09/2015.
 //  Copyright © 2015 AliSoftware. All rights reserved.
 //
 
 import Foundation
 
-typealias StringDict = [String:String]
-
-protocol DataProviderType {
-    func getAuthToken(completion: Bool -> Void)
-    func fetchRegisteredUsers(completion: [StringDict] -> Void)
-    func fetchMyProfile(completion: StringDict? -> Void)
-    func fetchFriends(user: String, completion: [StringDict] -> Void)
-}
-
-class DataProvider : DataProviderType {
+class PlistDataProvider : DataProviderType {
     var token: String?
     
+    let plistData: NSDictionary = {
+        guard let path = NSBundle.mainBundle().pathForResource("users", ofType: "plist"),
+            let dict = NSDictionary(contentsOfFile: path)
+            else { return NSDictionary() }
+        return dict
+    }()
+    
     func getAuthToken(completion: Bool -> Void) {
-        token = "FakeToken"
+        token = plistData["token"] as? String
         completion(true)
     }
     
     func fetchRegisteredUsers(completion: [StringDict] -> Void) {
         guard token != nil else { completion([]); return }
         fetchMyProfile { meDict in
-            var allDicts = [
-                ["name":"John Doe", "city": "New York", "country": "USA"],
-                ["name":"Bob", "city": "New York", "country": "USA"],
-                ["name":"Alice", "city": "Copenhagen", "country": "Denmark"],
-            ]
+            var allDicts = self.plistData["registeredUsers"] as! [StringDict]
             if let meDict = meDict {
                 allDicts.append(meDict)
             }
@@ -42,11 +36,7 @@ class DataProvider : DataProviderType {
     
     func fetchMyProfile(completion: StringDict? -> Void) {
         guard token != nil else { completion(nil); return }
-        let dict = [
-            "name": "AliSoftware",
-            "city": "Rennes",
-            "country": "France"
-        ]
+        let dict = plistData["me"] as! StringDict
         completion(dict)
     }
     
@@ -54,7 +44,7 @@ class DataProvider : DataProviderType {
         guard token != nil else { completion([]); return }
         let nbFriends = user.characters.count
         let friendsDicts = (1...nbFriends).map { idx in
-            ["name": "\(user)'s friend #\(idx)","city": "\(user)Ville","country": "FriendsLand"]
+            ["name": "\(user)'s friend #\(idx)","city": "\(user)Ville","country": "PlistLand"]
         }
         completion(friendsDicts)
     }
