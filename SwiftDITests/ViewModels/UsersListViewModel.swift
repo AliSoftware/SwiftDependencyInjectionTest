@@ -12,16 +12,9 @@ struct UsersListViewModel {
     var users: [UserViewModel]
     
     static func registeredUsers(completion: UsersListViewModel -> Void) {
-        let nyVM = AddressViewModel(city: "New York", country: "USA")
-        let cpVM = AddressViewModel(city: "Copenhagen", country: "Denmark")
-        UserViewModel.me() { me in
-            let allUsers = [
-                UserViewModel(name: "John Doe", address: nyVM),
-                UserViewModel(name: "Bob", address: nyVM),
-                UserViewModel(name: "Alice", address: cpVM),
-                me
-            ]
-            completion(UsersListViewModel(users: allUsers))
+        DataProvider.sharedInstance.fetchRegisteredUsers() { userDicts in
+            let userVMs = userDicts.map(UserViewModel.init).flatMap({$0})
+            completion(UsersListViewModel(users: userVMs))
         }
     }
     
@@ -29,4 +22,6 @@ struct UsersListViewModel {
         // TODO: Implement this
         completion(UsersListViewModel(users: []))
     }
+    
+
 }

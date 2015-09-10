@@ -12,10 +12,23 @@ struct UserViewModel {
     var name: String
     var address: AddressViewModel
     
-    static func me(completion: UserViewModel -> Void) {
-        completion(UserViewModel(
-            name: "AliSoftware",
-            address: AddressViewModel(city: "Rennes", country: "France")
-        ))
+    static func me(completion: UserViewModel? -> Void) {
+        DataProvider.sharedInstance.fetchMyProfile() { userDict in
+            completion(UserViewModel(dictionary: userDict))
+        }
+    }
+    
+    init(name: String, address: AddressViewModel) {
+        self.name = name
+        self.address = address
+    }
+    
+    init?(dictionary userDict: [String:String]) {
+        guard let name = userDict["name"],
+            let city = userDict["city"],
+            let country = userDict["country"]
+            else { return nil }
+        self.name = name
+        self.address = AddressViewModel(city: city, country: country)
     }
 }

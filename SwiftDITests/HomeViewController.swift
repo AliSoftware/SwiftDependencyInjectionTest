@@ -30,6 +30,7 @@ class HomeViewController: UIViewController {
     
     @IBAction func myProfileButtonTapped(sender: UIButton) {
         UserViewModel.me() { meVM in
+            guard let meVM = meVM else { return }
             let profileVC = UserViewController.instance(viewModel: meVM)
             profileVC.title = "Me"
             self.navigationController?.pushViewController(profileVC, animated: true)

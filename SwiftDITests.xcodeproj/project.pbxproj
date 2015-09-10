@@ -13,6 +13,7 @@
 		090E5C651BA20ED900F10EB8 /* AddressCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 090E5C641BA20ED900F10EB8 /* AddressCell.swift */; settings = {ASSET_TAGS = (); }; };
 		090E5C671BA20FC300F10EB8 /* UserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 090E5C661BA20FC300F10EB8 /* UserViewController.swift */; settings = {ASSET_TAGS = (); }; };
 		090E5C691BA20FDE00F10EB8 /* AddressViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 090E5C681BA20FDE00F10EB8 /* AddressViewController.swift */; settings = {ASSET_TAGS = (); }; };
+		090E5C6C1BA2236C00F10EB8 /* DataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 090E5C6B1BA2236C00F10EB8 /* DataProvider.swift */; settings = {ASSET_TAGS = (); }; };
 		09F97DBF1BA1FD0400981B82 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09F97DBE1BA1FD0400981B82 /* AppDelegate.swift */; };
 		09F97DC11BA1FD0400981B82 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09F97DC01BA1FD0400981B82 /* HomeViewController.swift */; };
 		09F97DC41BA1FD0400981B82 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 09F97DC21BA1FD0400981B82 /* Main.storyboard */; };
@@ -31,6 +32,7 @@
 		090E5C641BA20ED900F10EB8 /* AddressCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddressCell.swift; sourceTree = "<group>"; };
 		090E5C661BA20FC300F10EB8 /* UserViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserViewController.swift; sourceTree = "<group>"; };
 		090E5C681BA20FDE00F10EB8 /* AddressViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddressViewController.swift; sourceTree = "<group>"; };
+		090E5C6B1BA2236C00F10EB8 /* DataProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataProvider.swift; sourceTree = "<group>"; };
 		09F97DBB1BA1FD0400981B82 /* SwiftDITests.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SwiftDITests.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		09F97DBE1BA1FD0400981B82 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		09F97DC01BA1FD0400981B82 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
@@ -73,6 +75,14 @@
 			path = Cells;
 			sourceTree = "<group>";
 		};
+		090E5C6A1BA2234D00F10EB8 /* Provider */ = {
+			isa = PBXGroup;
+			children = (
+				090E5C6B1BA2236C00F10EB8 /* DataProvider.swift */,
+			);
+			path = Provider;
+			sourceTree = "<group>";
+		};
 		09F97DB21BA1FD0300981B82 = {
 			isa = PBXGroup;
 			children = (
@@ -94,6 +104,7 @@
 			children = (
 				09F97DBE1BA1FD0400981B82 /* AppDelegate.swift */,
 				09F97DC01BA1FD0400981B82 /* HomeViewController.swift */,
+				090E5C6A1BA2234D00F10EB8 /* Provider */,
 				09F97DD71BA2015F00981B82 /* ViewModels */,
 				09F97DDA1BA2064500981B82 /* ViewControllers */,
 				090E5C5F1BA20BB800F10EB8 /* Cells */,
@@ -216,6 +227,7 @@
 				09F97DBF1BA1FD0400981B82 /* AppDelegate.swift in Sources */,
 				09F97DD41BA1FFDE00981B82 /* AddressViewModel.swift in Sources */,
 				090E5C5E1BA208A200F10EB8 /* Storyboards.swift in Sources */,
+				090E5C6C1BA2236C00F10EB8 /* DataProvider.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
