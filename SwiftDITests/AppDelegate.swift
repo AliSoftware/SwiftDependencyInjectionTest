@@ -18,6 +18,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
         
         DependencyContainer.register(HardCodedDataProvider() as DataProviderType)
+//        DependencyContainer.register(PlistDataProvider() as DataProviderType)
         
         return true
     }
