@@ -4,6 +4,69 @@ This is a test project to play around and explore some Dependency Injection idea
 
 This is open to discussion, remarks and suggestions as it's merely experimental.
 
+# Current solution
+
+After some evolution of the project (see [below](#git-tags)), here is how the current solution works.
+
+## Register instances and instance factories
+
+At the beginning of your app's life-cycle (or better, in `@objc class func initialize() {}` declared in an `extension Dependency`), you register instances and instance factories with protocols.
+
+* `register(singleton: _)` will register a singleton instance with a given protocol
+* `register(instanceFactory: _)` will register an instance factory — which generates a new instance each time you `resolve()`
+* You need _cast the instance to the protocol type_ you want to register it with (e.g. `register(singleton: PlistUsersProvider() as UsersListProviderType)`)
+* if you give a `tag` in the parameter to `register()`, it will associate that instance or instance factory with this tag, which can be used later during `resolve` (see below)
+
+## Resolve dependencies
+
+* `Dependency.resolve()` will return a new instance matching the requested protocol
+* Explicitly specify the return type of `resolve` so that Swift's type inference knows which protocol you're trying to resolve
+* If that protocol was registered as a singleton, the same instance will be returned each time you call `resolve()` for this protocol type. Otherwise, the instance factory will generate a new instance each time
+* `Dependency.resolve(tag)` will try to find an instance (or instance factory) that match both the requested protocol _and_ the tag. If it doesn't find any, it will fallback to an instance (or instance factory) that only match the requested protocol.
+
+
+## Example
+
+Somewhere in your App target, register the dependencies. Best place to do that is probably in `Dependency.initialize()`:
+
+```swift
+extension Dependency {
+    @objc class func initialize() {
+        Dependency.register(singleton: WebService() as WebServiceType)
+        Dependency.register() { DummyFriendsProvider(user: $0 ?? "Jane Doe") as FriendsProviderType }
+        Dependency.register("me") { PlistFriendsProvider(plist: "myfriends") as FriendsProviderType }
+    }
+}
+```
+
+> Do the same in your Unit Tests target & test cases, but obviously with different Dependencies registered, depending on what you want to test and what instances you need to inject to provide dummy implementations for your tests.
+
+
+Then to use dependencies throughout your app, use `Dependency.resolve()`, like this:
+
+```swift
+struct SomeViewModel {
+  let ws: WebServiceType = Dependency.resolve()
+  var friendsProvider: FriendsProviderType
+  init(userName: String) {
+    friendsProvider = Dependency.resolve(userName)
+  }
+  func foo() {
+    ws.someMethodDeclaredOnWebServiceType()
+    let friends = friendsProvider.someFriendsProviderTypeMethod()
+    print("friends: \(friends)")
+  }
+```
+
+This way, when running your app target:
+
+* `ws` will be resolved as your singleton instance `WebService` registered before.
+* `friendsProvider` will be resolved as a new instance each time, which will be an instance created via `PlistFriendsProvider(plist: "myfriends")` if `userName` is `me` and created via `DummyFriendsProvider(userName)` for any other `userName` value (because `resolve(userName)` will fallback to `resolve(nil)` in that case, using the instance factory which was registered without a tag).
+
+But when running your Unit tests target, it will probably resolve to other instances, depending on how you registered your dependencies in your Test Case.
+
+---
+
 # Git Tags & Project evolution
 
 ## demo-base
@@ -28,54 +91,4 @@ At this stage, this `DependencyContainer` was only able to register instances di
 
 ## DependencyResolver
 
-This tag is the next step to the previous one. The newly-renamed `Dependency` class works as follows:
-
-### Register instances and instance factories
-
-At the beginning of your app's life-cycle (or better, in `@objc class func initialize() {}` declared in an `extension Dependency`), you register instances and instance factories with protocols.
-
-* `register(singleton: _)` will register a singleton instance with a given protocol
-* `register(instanceFactory: _)` will register an instance factory — which generates a new instance each time you `resolve()`
-* You need to pass an instance (or instance factory) that is _casted to the protocol type_ you want to register it with (e.g. `register(singleton: PlistUsersProvider() as UsersListProviderType)` will register the PlistUsersProvider singleton instance so it's used when we request an object conforming to the `UsersListProviderType` protocol)
-* if you give a `tag` in the parameter to `register(tag: …, …)`, it will associate that instance or instance factory with this tag while registering
-
-### Resolve dependencies
-
-* `Dependency.resolve()` will return a new instance matching the requested protocol
-* Specify the return type of `resolve` (using `var v: MyProtocol = Dependency.resolve()` or `var v = Dependency.resolve() as MyProtocol`) so that Swift's type inference knows which protocol you're trying to resolve into an instance
-* If that protocol was registered as a singleton, the same instance will be returned each time you call `resolve()` for this protocol type. Otherwise, the instance factory will generate a new instance each time
-* `Dependency.resolve(tag)` will try to find an instance (or instance factory) that match both the requested protocol _and_ the tag. If it doesn't find any, it will fallback to an instance (or instance factory) that only match the requested protocol. That allows you to have generic resolutions for all tags but some, which will use a specific resolution instead.
-
-
-# Example for the current solution
-
-Somewhere in your App target, register the dependencies. Best place to do that is probably in `Dependency.initialize()` so that it's configured right before the first time we use `Dependency` somewhere in the app.
-
-```swift
-extension Dependency {
-    @objc class func initialize() {
-        Dependency.register(singleton: WebService() as WebServiceType)
-        Dependency.register() { DummyFriendsProvider(user: $0 ?? "Jane Doe") as FriendsProviderType }
-        Dependency.register("me") { PlistFriendsProvider(plist: "myfriends") as FriendsProviderType }
-    }
-}
-```
-
-Do the same in your Unit Tests target & test cases, but obviously with different Dependencies registered depending on what you want to test and what instances you need to change to provide dummy implementations for your tests.
-
-
-Then to use dependencies throughout your app, use `Dependency.resolve()`, like:
-
-```swift
-struct SomeViewModel {
-  let ws: WebServiceType = Dependency.resolve()
-  var friendsProvider: FriendsProviderType
-  init(userName: String) {
-    friendsProvider = Dependency.resolve(userName)
-  }
-```
-
-In your app target:
-
-* `ws` will be resolved as your singleton instance `WebService` registered before.
-* `friendsProvider` will be resolved as a new instance each time, which will be an instance created via `PlistFriendsProvider(plist: "myfriends")` if `userName` is `me` and created via `DummyFriendsProvider(userName)` for any other `userName` value (because `resolve(userName)` will fallback to `resolve(nil)` in that case, using the instance factory which was registered without a tag).
+This tag is the step right after to the previous one. The `DependencyContainer` class has been renamed to `Dependency` and now works as explained above.
