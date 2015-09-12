@@ -1,5 +1,5 @@
 //
-//  PlistDataProvider.swift
+//  PlistUsersProvider.swift
 //  SwiftDITests
 //
 //  Created by Olivier Halligon on 11/09/2015.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-class PlistDataProvider : DataProviderType {
+class PlistUsersProvider : UsersListProviderType {
     var token: String?
     
     let plistData: NSDictionary = {
@@ -38,14 +38,5 @@ class PlistDataProvider : DataProviderType {
         guard token != nil else { completion(nil); return }
         let dict = plistData["me"] as! StringDict
         completion(dict)
-    }
-    
-    func fetchFriends(user: String, completion: [StringDict] -> Void) {
-        guard token != nil else { completion([]); return }
-        let nbFriends = user.characters.count
-        let friendsDicts = (1...nbFriends).map { idx in
-            ["name": "\(user)'s friend #\(idx)","city": "\(user)Ville","country": "PlistLand"]
-        }
-        completion(friendsDicts)
     }
 }

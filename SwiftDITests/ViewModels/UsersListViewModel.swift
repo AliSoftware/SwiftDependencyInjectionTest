@@ -9,19 +9,21 @@
 import Foundation
 
 struct UsersListViewModel {
-    static let dataProvider: DataProviderType = Dependency.resolve()
+    
+    static let usersProvider: UsersListProviderType = Dependency.resolve()
 
     var users: [UserViewModel]
     
     static func registeredUsers(completion: UsersListViewModel -> Void) {
-        dataProvider.fetchRegisteredUsers() { userDicts in
+        usersProvider.fetchRegisteredUsers() { userDicts in
             let userVMs = userDicts.flatMap(UserViewModel.init)
             completion(UsersListViewModel(users: userVMs))
         }
     }
     
     static func friends(userName: String, completion: UsersListViewModel -> Void) {
-        dataProvider.fetchFriends(userName) { userDicts in
+        let friendsProvider: FriendsProviderType = Dependency.resolve(userName)
+        friendsProvider.fetchFriends() { userDicts in
             let userVMs = userDicts.flatMap(UserViewModel.init)
             completion(UsersListViewModel(users: userVMs))
         }

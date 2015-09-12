@@ -8,7 +8,7 @@
 
 import XCTest
 
-class TestDataProvider : DataProviderType {
+class TestUsersProvider : UsersListProviderType {
     func getAuthToken(completion: Bool -> Void) {
         completion(false)
     }
@@ -18,16 +18,13 @@ class TestDataProvider : DataProviderType {
     func fetchMyProfile(completion: StringDict? -> Void) {
         completion(["name": "nameMe", "city": "cityMe", "country": "countryMe"])
     }
-    func fetchFriends(user: String, completion: [StringDict] -> Void) {
-        completion([])
-    }
 }
 
 class Unit_Tests: XCTestCase {
     override func setUp() {
         super.setUp()
         // Put setup code here. This method is called before the invocation of each test method in the class.
-        Dependency.register(singleton: TestDataProvider() as DataProviderType)
+        Dependency.register(singleton: TestUsersProvider() as UsersListProviderType)
     }
     
     override func tearDown() {

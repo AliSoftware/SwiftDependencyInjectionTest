@@ -11,46 +11,72 @@ import Foundation
 class Dependency {
     typealias TagType = String
     typealias InstanceType = Any
-    typealias InstanceFactory = Void->InstanceType
+    typealias InstanceFactory = TagType?->InstanceType
     
-    struct Key : Hashable {
+    private struct Key : Hashable, CustomDebugStringConvertible {
         var protocolType: Any.Type
         var associatedTag: TagType?
         
         var hashValue: Int {
             return "\(protocolType)-\(associatedTag)".hashValue
         }
+        
+        var debugDescription: String {
+            return "type: \(protocolType), tag: \(associatedTag)"
+        }
     }
     
-    static var dependencies = [Key: InstanceFactory]()
+    private static var dependencies = [Key: InstanceFactory]()
+    
+    // MARK: - Reset all dependencies
     
     static func reset() {
         dependencies.removeAll()
     }
     
-    static func register<T : Any>(tag: TagType? = nil, instanceFactory: Void->T) {
+    // MARK: - Register dependencies
+    
+    /// Register a TagType?->T factory (which takes the tag as parameter)
+    static func register<T : Any>(tag: TagType? = nil, instanceFactory: TagType?->T) {
         let key = Key(protocolType: T.self, associatedTag: tag)
         dependencies[key] = { instanceFactory($0) }
     }
 
+    /// Register a Void->T factory (which don't care about the tag used)
+    static func register<T : Any>(tag: TagType? = nil, instanceFactory: Void->T) {
+        let key = Key(protocolType: T.self, associatedTag: tag)
+        dependencies[key] = { _ in instanceFactory() }
+    }
+
+    /// Register a Singleton
     static func register<T : Any>(tag: TagType? = nil, @autoclosure(escaping) singleton instanceFactory: Void->T) {
         let key = Key(protocolType: T.self, associatedTag: tag)
-        dependencies[key] = {
-            let instance = instanceFactory($0)
-            dependencies[key] = { return instance }
+        // FIXME: Make it thread-safe
+        dependencies[key] = { _ in
+            let instance = instanceFactory()
+            dependencies[key] = { _ in return instance }
             return instance
         }
     }
+    
+    // MARK: - Resolve dependencies
 
+    /// Resolve a dependency
+    ///
+    /// **Note** If a tag is given, it will try to resolve using the tag to generate a specific instance,
+    ///          and fallback without the tag if not found with it
     static func resolve<T>(tag: TagType? = nil) -> T! {
         let key = Key(protocolType: T.self, associatedTag: tag)
-        guard let factory = dependencies[key] else {
-            fatalError("No instance factory registered with this type and tag")
+        let nilKey = Key(protocolType: T.self, associatedTag: nil)
+        guard let factory = dependencies[key] ?? dependencies[nilKey] else {
+            fatalError("No instance factory registered with \(key)")
         }
-        return factory() as! T
+        return factory(tag) as! T
     }
 }
 
-func == (lhs: Dependency.Key, rhs: Dependency.Key) -> Bool {
+// MARK: -
+
+private func == (lhs: Dependency.Key, rhs: Dependency.Key) -> Bool {
     return lhs.protocolType == rhs.protocolType && lhs.associatedTag == rhs.associatedTag
 }

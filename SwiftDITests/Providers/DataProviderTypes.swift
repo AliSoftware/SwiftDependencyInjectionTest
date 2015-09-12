@@ -1,5 +1,5 @@
 //
-//  DataProviderType.swift
+//  DataProviderTypes.swift
 //  SwiftDITests
 //
 //  Created by Olivier Halligon on 10/09/2015.
@@ -10,9 +10,12 @@ import Foundation
 
 typealias StringDict = [String:String]
 
-protocol DataProviderType {
+protocol UsersListProviderType {
     func getAuthToken(completion: Bool -> Void)
     func fetchRegisteredUsers(completion: [StringDict] -> Void)
     func fetchMyProfile(completion: StringDict? -> Void)
-    func fetchFriends(user: String, completion: [StringDict] -> Void)
+}
+
+protocol FriendsProviderType {
+    func fetchFriends(completion: [StringDict] -> Void)
 }

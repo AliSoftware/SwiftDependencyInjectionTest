@@ -10,6 +10,8 @@ import UIKit
 
 class HomeViewController: UIViewController {
 
+    let usersProvider = Dependency.resolve() as UsersListProviderType
+    
     // MARK: View LifeCycle
     
     override func viewDidLoad() {
@@ -21,8 +23,7 @@ class HomeViewController: UIViewController {
     // MARK: - Actions
     
     @IBAction func requestTokenButtonTapped(sender: UIButton) {
-        let dataProvider = Dependency.resolve() as DataProviderType
-        dataProvider.getAuthToken() { _ in }
+        usersProvider.getAuthToken() { _ in }
     }
     
     @IBAction func usersButtonTapped(sender: UIButton) {

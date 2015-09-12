@@ -1,5 +1,5 @@
 //
-//  HardCodedDataProvider.swift
+//  HardCodedUsersProvider.swift
 //  SwiftDITests
 //
 //  Created by Olivier Halligon on 11/09/2015.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-class HardCodedDataProvider : DataProviderType {
+class HardCodedUsersProvider : UsersListProviderType {
     var token: String?
     
     func getAuthToken(completion: Bool -> Void) {
@@ -39,14 +39,5 @@ class HardCodedDataProvider : DataProviderType {
             "country": "France"
         ]
         completion(dict)
-    }
-    
-    func fetchFriends(user: String, completion: [StringDict] -> Void) {
-        guard token != nil else { completion([]); return }
-        let nbFriends = user.characters.count
-        let friendsDicts = (1...nbFriends).map { idx in
-            ["name": "\(user)'s friend #\(idx)","city": "\(user)Ville","country": "FriendsLand"]
-        }
-        completion(friendsDicts)
     }
 }

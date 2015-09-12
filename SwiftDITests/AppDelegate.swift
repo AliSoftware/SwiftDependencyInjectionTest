@@ -17,11 +17,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
         
-        Dependency.register(singleton: HardCodedDataProvider() as DataProviderType)
-//        Dependency.register(singleton: PlistDataProvider() as DataProviderType )
-        
         return true
     }
 
 }
 
+extension Dependency {
+    @objc class func initialize() {
+        // Register the UsersListProviderType singleton
+        Dependency.register(singleton: HardCodedUsersProvider() as UsersListProviderType)
+        // Register the FriendsProviderTypes, one generic (1) and one specific (2) for a specific user (me)
+        // 1) associate with nil tag so it resolves with everything, but use the tag when invoking the factory to build tailored instances
+        Dependency.register() { DummyFriendsProvider(user: $0 ?? "Jane Doe") as FriendsProviderType }
+        // 2) associate with a specific tag so it uses this specific factory when resolving against this specific tag (but we don't need the tag in the closure body)
+        Dependency.register("AliSoftware") { PlistFriendsProvider(plist: "myfriends") as FriendsProviderType }
+    }
+}

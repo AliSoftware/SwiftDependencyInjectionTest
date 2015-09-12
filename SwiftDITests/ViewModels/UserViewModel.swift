@@ -13,8 +13,8 @@ struct UserViewModel {
     var address: AddressViewModel
     
     static func me(completion: UserViewModel? -> Void) {
-        let dataProvider: DataProviderType = Dependency.resolve()
-        dataProvider.fetchMyProfile() { userDict in
+        let usersProvider: UsersListProviderType = Dependency.resolve()
+        usersProvider.fetchMyProfile() { userDict in
             completion(userDict.flatMap(UserViewModel.init))
         }
     }
