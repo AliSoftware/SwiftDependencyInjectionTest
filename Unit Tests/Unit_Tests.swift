@@ -27,7 +27,7 @@ class Unit_Tests: XCTestCase {
     override func setUp() {
         super.setUp()
         // Put setup code here. This method is called before the invocation of each test method in the class.
-        DependencyContainer.register(TestDataProvider() as DataProviderType)
+        Dependency.register(singleton: TestDataProvider() as DataProviderType)
     }
     
     override func tearDown() {

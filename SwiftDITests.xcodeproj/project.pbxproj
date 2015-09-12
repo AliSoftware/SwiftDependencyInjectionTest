@@ -14,7 +14,7 @@
 		090E5C671BA20FC300F10EB8 /* UserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 090E5C661BA20FC300F10EB8 /* UserViewController.swift */; settings = {ASSET_TAGS = (); }; };
 		090E5C691BA20FDE00F10EB8 /* AddressViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 090E5C681BA20FDE00F10EB8 /* AddressViewController.swift */; settings = {ASSET_TAGS = (); }; };
 		090E5C6C1BA2236C00F10EB8 /* DataProviderType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 090E5C6B1BA2236C00F10EB8 /* DataProviderType.swift */; settings = {ASSET_TAGS = (); }; };
-		090E5C6E1BA23A8A00F10EB8 /* DependencyContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 090E5C6D1BA23A8A00F10EB8 /* DependencyContainer.swift */; settings = {ASSET_TAGS = (); }; };
+		090E5C6E1BA23A8A00F10EB8 /* Dependency.swift in Sources */ = {isa = PBXBuildFile; fileRef = 090E5C6D1BA23A8A00F10EB8 /* Dependency.swift */; settings = {ASSET_TAGS = (); }; };
 		090E5C701BA24A3400F10EB8 /* PlistDataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 090E5C6F1BA24A3400F10EB8 /* PlistDataProvider.swift */; settings = {ASSET_TAGS = (); }; };
 		090E5C721BA24A4000F10EB8 /* HardCodedDataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 090E5C711BA24A4000F10EB8 /* HardCodedDataProvider.swift */; settings = {ASSET_TAGS = (); }; };
 		090E5C741BA24B7800F10EB8 /* users.plist in Resources */ = {isa = PBXBuildFile; fileRef = 090E5C731BA24B7800F10EB8 /* users.plist */; settings = {ASSET_TAGS = (); }; };
@@ -25,7 +25,7 @@
 		090E5C861BA24F2D00F10EB8 /* DataProviderType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 090E5C6B1BA2236C00F10EB8 /* DataProviderType.swift */; settings = {ASSET_TAGS = (); }; };
 		090E5C871BA24F2D00F10EB8 /* PlistDataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 090E5C6F1BA24A3400F10EB8 /* PlistDataProvider.swift */; settings = {ASSET_TAGS = (); }; };
 		090E5C881BA24F2D00F10EB8 /* HardCodedDataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 090E5C711BA24A4000F10EB8 /* HardCodedDataProvider.swift */; settings = {ASSET_TAGS = (); }; };
-		090E5C891BA24F3100F10EB8 /* DependencyContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 090E5C6D1BA23A8A00F10EB8 /* DependencyContainer.swift */; settings = {ASSET_TAGS = (); }; };
+		090E5C891BA24F3100F10EB8 /* Dependency.swift in Sources */ = {isa = PBXBuildFile; fileRef = 090E5C6D1BA23A8A00F10EB8 /* Dependency.swift */; settings = {ASSET_TAGS = (); }; };
 		09F97DBF1BA1FD0400981B82 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09F97DBE1BA1FD0400981B82 /* AppDelegate.swift */; };
 		09F97DC11BA1FD0400981B82 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09F97DC01BA1FD0400981B82 /* HomeViewController.swift */; };
 		09F97DC41BA1FD0400981B82 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 09F97DC21BA1FD0400981B82 /* Main.storyboard */; };
@@ -55,7 +55,7 @@
 		090E5C661BA20FC300F10EB8 /* UserViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserViewController.swift; sourceTree = "<group>"; };
 		090E5C681BA20FDE00F10EB8 /* AddressViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddressViewController.swift; sourceTree = "<group>"; };
 		090E5C6B1BA2236C00F10EB8 /* DataProviderType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataProviderType.swift; sourceTree = "<group>"; };
-		090E5C6D1BA23A8A00F10EB8 /* DependencyContainer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DependencyContainer.swift; sourceTree = "<group>"; };
+		090E5C6D1BA23A8A00F10EB8 /* Dependency.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Dependency.swift; sourceTree = "<group>"; };
 		090E5C6F1BA24A3400F10EB8 /* PlistDataProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlistDataProvider.swift; sourceTree = "<group>"; };
 		090E5C711BA24A4000F10EB8 /* HardCodedDataProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HardCodedDataProvider.swift; sourceTree = "<group>"; };
 		090E5C731BA24B7800F10EB8 /* users.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = users.plist; sourceTree = "<group>"; };
@@ -153,7 +153,7 @@
 			children = (
 				09F97DBE1BA1FD0400981B82 /* AppDelegate.swift */,
 				09F97DC01BA1FD0400981B82 /* HomeViewController.swift */,
-				090E5C6D1BA23A8A00F10EB8 /* DependencyContainer.swift */,
+				090E5C6D1BA23A8A00F10EB8 /* Dependency.swift */,
 				090E5C6A1BA2234D00F10EB8 /* Providers */,
 				09F97DD71BA2015F00981B82 /* ViewModels */,
 				09F97DDA1BA2064500981B82 /* ViewControllers */,
@@ -302,7 +302,7 @@
 				090E5C871BA24F2D00F10EB8 /* PlistDataProvider.swift in Sources */,
 				090E5C861BA24F2D00F10EB8 /* DataProviderType.swift in Sources */,
 				090E5C881BA24F2D00F10EB8 /* HardCodedDataProvider.swift in Sources */,
-				090E5C891BA24F3100F10EB8 /* DependencyContainer.swift in Sources */,
+				090E5C891BA24F3100F10EB8 /* Dependency.swift in Sources */,
 				090E5C851BA24F2000F10EB8 /* AddressViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -311,7 +311,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				090E5C6E1BA23A8A00F10EB8 /* DependencyContainer.swift in Sources */,
+				090E5C6E1BA23A8A00F10EB8 /* Dependency.swift in Sources */,
 				09F97DC11BA1FD0400981B82 /* HomeViewController.swift in Sources */,
 				09F97DD91BA2019600981B82 /* UsersListViewModel.swift in Sources */,
 				090E5C701BA24A3400F10EB8 /* PlistDataProvider.swift in Sources */,
@@ -497,6 +497,7 @@
 				090E5C821BA24F0B00F10EB8 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		09F97DB61BA1FD0300981B82 /* Build configuration list for PBXProject "SwiftDITests" */ = {
 			isa = XCConfigurationList;

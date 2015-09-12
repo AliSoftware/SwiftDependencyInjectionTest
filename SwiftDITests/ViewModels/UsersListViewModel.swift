@@ -9,7 +9,7 @@
 import Foundation
 
 struct UsersListViewModel {
-    static let dataProvider: DataProviderType = DependencyContainer.resolve()
+    static let dataProvider: DataProviderType = Dependency.resolve()
 
     var users: [UserViewModel]
     

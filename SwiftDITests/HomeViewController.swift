@@ -21,7 +21,7 @@ class HomeViewController: UIViewController {
     // MARK: - Actions
     
     @IBAction func requestTokenButtonTapped(sender: UIButton) {
-        let dataProvider = DependencyContainer.resolve() as DataProviderType
+        let dataProvider = Dependency.resolve() as DataProviderType
         dataProvider.getAuthToken() { _ in }
     }
     
