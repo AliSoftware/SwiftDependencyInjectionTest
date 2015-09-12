@@ -35,6 +35,8 @@ Somewhere in your App target, register the dependencies. Best place to do that i
 ```swift
 extension Dependency {
     @objc class func initialize() {
+        let env = ProductionEnvironment(analytics: true)
+        Dependency.register(singleton: env as EnvironmentType)
         Dependency.register(singleton: WebService() as WebServiceType)
         Dependency.register() { DummyFriendsProvider(user: $0 ?? "Jane Doe") as FriendsProviderType }
         Dependency.register("me") { PlistFriendsProvider(plist: "myfriends") as FriendsProviderType }
@@ -48,6 +50,13 @@ extension Dependency {
 Then to use dependencies throughout your app, use `Dependency.resolve()`, like this:
 
 ```swift
+struct WebService {
+  let env: EnvironmentType = Dependency.resolve()
+  func sendRequest(path: String, …) {
+    // ... use stuff like env.baseURL here
+  }
+}
+
 struct SomeViewModel {
   let ws: WebServiceType = Dependency.resolve()
   var friendsProvider: FriendsProviderType
