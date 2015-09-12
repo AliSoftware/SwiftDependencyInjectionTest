@@ -17,6 +17,8 @@ At the beginning of your app's life-cycle (or better, in `@objc class func initi
 * You need _cast the instance to the protocol type_ you want to register it with (e.g. `register(singleton: PlistUsersProvider() as UsersListProviderType)`)
 * if you give a `tag` in the parameter to `register()`, it will associate that instance or instance factory with this tag, which can be used later during `resolve` (see below)
 
+_[See this in action in the sample code](SwiftDITests/AppDelegate.swift#L25-L35)._
+
 ## Resolve dependencies
 
 * `Dependency.resolve()` will return a new instance matching the requested protocol
@@ -24,6 +26,7 @@ At the beginning of your app's life-cycle (or better, in `@objc class func initi
 * If that protocol was registered as a singleton, the same instance will be returned each time you call `resolve()` for this protocol type. Otherwise, the instance factory will generate a new instance each time
 * `Dependency.resolve(tag)` will try to find an instance (or instance factory) that match both the requested protocol _and_ the tag. If it doesn't find any, it will fallback to an instance (or instance factory) that only match the requested protocol.
 
+_[See this in action in the sample code here](SwiftDITests/ViewModels/UsersListViewModel.swift#L13), [here](SwiftDITests/ViewModels/UsersListViewModel.swift#L25) and [here](SwiftDITests/ViewModels/UserViewModel.swift#L16)._
 
 ## Example
 
