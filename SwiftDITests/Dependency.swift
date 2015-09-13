@@ -48,8 +48,8 @@ class Dependency {
         dependencies[key] = { _ in instanceFactory() }
     }
 
-    /// Register a Singleton
-    static func register<T : Any>(tag: TagType? = nil, @autoclosure(escaping) singleton instanceFactory: Void->T) {
+    /// Register a Singleton instance
+    static func register<T : Any>(tag: TagType? = nil, @autoclosure(escaping) instance instanceFactory: Void->T) {
         let key = Key(protocolType: T.self, associatedTag: tag)
         // FIXME: Make it thread-safe
         dependencies[key] = { _ in

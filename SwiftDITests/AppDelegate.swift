@@ -25,7 +25,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 extension Dependency {
     @objc class func initialize() {
         // Register the UsersListProviderType singleton
-        Dependency.register(singleton: HardCodedUsersProvider() as UsersListProviderType)
+        Dependency.register(instance: HardCodedUsersProvider() as UsersListProviderType)
         // Register the FriendsProviderTypes, one generic (1) and one specific (2) for a specific user (me)
         // 1) associate with nil tag so it resolves with everything, but use the tag when invoking the factory to build tailored instances
         Dependency.register() { DummyFriendsProvider(user: $0 ?? "Jane Doe") as FriendsProviderType }

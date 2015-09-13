@@ -12,9 +12,9 @@ After some evolution of the project (see [below](#git-tags)), here is how the cu
 
 At the beginning of your app's life-cycle (or better, in `@objc class func initialize() {}` declared in an `extension Dependency`), you register instances and instance factories with protocols.
 
-* `register(singleton: _)` will register a singleton instance with a given protocol
+* `register(instance: _)` will register a singleton instance with a given protocol
 * `register(instanceFactory: _)` will register an instance factory — which generates a new instance each time you `resolve()`
-* You need _cast the instance to the protocol type_ you want to register it with (e.g. `register(singleton: PlistUsersProvider() as UsersListProviderType)`)
+* You need _cast the instance to the protocol type_ you want to register it with (e.g. `register(instance: PlistUsersProvider() as UsersListProviderType)`)
 * if you give a `tag` in the parameter to `register()`, it will associate that instance or instance factory with this tag, which can be used later during `resolve` (see below)
 
 _[See this in action in the sample code](SwiftDITests/AppDelegate.swift#L25-L35)._
@@ -36,8 +36,8 @@ Somewhere in your App target, register the dependencies. Best place to do that i
 extension Dependency {
     @objc class func initialize() {
         let env = ProductionEnvironment(analytics: true)
-        Dependency.register(singleton: env as EnvironmentType)
-        Dependency.register(singleton: WebService() as WebServiceType)
+        Dependency.register(instance: env as EnvironmentType)
+        Dependency.register(instance: WebService() as WebServiceType)
         Dependency.register() { DummyFriendsProvider(user: $0 ?? "Jane Doe") as FriendsProviderType }
         Dependency.register("me") { PlistFriendsProvider(plist: "myfriends") as FriendsProviderType }
     }
